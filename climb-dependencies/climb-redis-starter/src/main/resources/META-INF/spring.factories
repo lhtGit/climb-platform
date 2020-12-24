@@ -1,0 +1,6 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.climb.redis.config.RedisTemplateConfig, \
+  com.climb.redis.config.RedisCacheConfig, \
+  com.climb.redis.lock.LockConfig,\
+  com.climb.redis.config.RedisLockHttpAutoConfiguration,\
+  com.climb.redis.feign.AutoConfig

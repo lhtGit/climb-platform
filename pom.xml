@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.climb</groupId>
+    <artifactId>climb-platform</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+
+    <modules>
+        <module>climb-dependencies</module>
+    </modules>
+    <!--版本控制-->
+    <properties>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+        <core.version>1.0.0</core.version>
+        <spring-cloud-dependencies.version>Hoxton.SR3</spring-cloud-dependencies.version>
+        <spring-boot.version>2.3.3.RELEASE</spring-boot.version>
+        <nacos-version>2.2.1.RELEASE</nacos-version>
+        <openfeign-version>2.2.5.RELEASE</openfeign-version>
+        <mybatis-plus-version>3.4.0</mybatis-plus-version>
+        <mysql-versin>6.0.6</mysql-versin>
+        <druid.version>1.1.23</druid.version>
+        <hutool.version>5.4.1</hutool.version>
+        <swagger2.version>2.8.0</swagger2.version>
+        <jackson.version>2.11.2</jackson.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--spring boot-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!--spring cloud-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud-dependencies.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!--openfeign-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-openfeign</artifactId>
+                <version>${openfeign-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-elasticsearch</artifactId>
+                <version>4.1.2</version>
+            </dependency>
+            <!--lombok-->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.12</version>
+                <scope>provided</scope>
+            </dependency>
+            <!--fastjson-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.73</version>
+            </dependency>
+            <!--easyexcel-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>easyexcel</artifactId>
+                <version>2.2.6</version>
+            </dependency>
+            <!--工具类-->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>0.9.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>29.0-jre</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <!--mybatis-->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-core</artifactId>
+                <version>${mybatis-plus-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus-version}</version>
+            </dependency>
+            <!--db-->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-versin}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <!--swagger-->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-ui</artifactId>
+                <version>2.0.5</version>
+            </dependency>
+            <!-- jackson -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-jsr310</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <!--seata -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-seata</artifactId>
+                <version>2.2.0.RELEASE</version>
+            </dependency>
+            <!--rabbitmq-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-amqp</artifactId>
+                <version>2.3.3.RELEASE</version>
+            </dependency>
+
+
+
+            <!--climb-common -->
+            <dependency>
+                <groupId>com.climb</groupId>
+                <artifactId>climb-common-starter</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <!--climb swagger-->
+            <dependency>
+                <groupId>com.climb</groupId>
+                <artifactId>climb-swagger-starter</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <!--climb redis-->
+            <dependency>
+                <groupId>com.climb</groupId>
+                <artifactId>climb-redis-starter</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <!--climb seata-->
+            <dependency>
+                <groupId>com.climb</groupId>
+                <artifactId>climb-seata-starter</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <!--climb feign-->
+            <dependency>
+                <groupId>com.climb</groupId>
+                <artifactId>climb-feign-starter</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <!--climb mybatis-->
+            <dependency>
+                <groupId>com.climb</groupId>
+                <artifactId>climb-mybatis-starter</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
+    </dependencies>
+
+    <!--插件-->
+    <build>
+        <resources>
+            <!-- 先指定 src/main/resources下所有文件及文件夹为资源文件 -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/**</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.3.4.RELEASE</version>
+            </plugin>
+        </plugins>
+    </build>
+    <!-- 配置nacos 环境 -->
+    <profiles>
+        <!-- 本地环境 -->
+        <profile>
+            <id>local</id>
+            <activation>
+                <!--默认激活配置-->
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <!--当前环境-->
+                <profile.name>local</profile.name>
+                <!--Nacos配置中心地址-->
+                <config.server-addr>127.0.0.1:8848</config.server-addr>
+                <config.group>DEFAULT_GROUP</config.group>
+                <config.username>nacos</config.username>
+                <config.password>nacos</config.password>
+                <config.namespace>a8b1a504-de2a-4617-adc1-e4f7277d1456</config.namespace>
+                <!--Nacos服务发现地址-->
+                <discovery.server-addr>127.0.0.1:8848</discovery.server-addr>
+                <discovery.username>nacos</discovery.username>
+                <discovery.password>nacos</discovery.password>
+                <discovery.group>DEFAULT_GROUP</discovery.group>
+                <discovery.namespace>a8b1a504-de2a-4617-adc1-e4f7277d1456</discovery.namespace>
+            </properties>
+        </profile>
+
+        <!--开发环境-->
+        <profile>
+            <id>dev</id>
+            <properties>
+                <!--当前环境-->
+                <profile.name>dev</profile.name>
+                <!--Nacos配置中心地址-->
+                <config.server-addr>192.168.13.3:8848</config.server-addr>
+                <config.group>DEFAULT_GROUP</config.group>
+                <config.username>nacos</config.username>
+                <config.password>nacos</config.password>
+                <config.namespace>dev</config.namespace>
+                <!--Nacos服务发现地址-->
+                <discovery.server-addr>192.168.13.3:8848</discovery.server-addr>
+                <discovery.username>nacos</discovery.username>
+                <discovery.password>nacos</discovery.password>
+                <discovery.group>DEFAULT_GROUP</discovery.group>
+                <discovery.namespace>dev</discovery.namespace>
+            </properties>
+        </profile>
+    </profiles>
+
+</project>

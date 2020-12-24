@@ -1,0 +1,13 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: gglc-erp-base
+          uri: lb://gglc-erp-base
+          predicates:
+            - Path=/erp/base/**
+
+swagger:
+  resources:
+    - url: /erp/base/v2/api-docs?group=gglc-erp-base
+      name: gglc-erp-base api

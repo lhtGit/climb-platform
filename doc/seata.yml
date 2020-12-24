@@ -1,0 +1,23 @@
+seata:
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      group: DEFAULT_GROUP
+      server-addr: 192.168.8.231:8848
+      namespace: seata
+      cluster: seata-server
+      username: nacos
+      password: nacos
+  config:
+    type: nacos
+    nacos:
+      server-addr: 192.168.8.231:8848
+      group: SEATA_GROUP
+      namespace: seata
+      username: nacos
+      password: nacos
+spring:
+  alibaba:
+    seata:
+      tx-service-group: tx_group
