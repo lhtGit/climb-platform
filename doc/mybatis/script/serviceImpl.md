@@ -11,7 +11,7 @@ $!define
 ##包路径（宏定义）
 #setPackageSuffix("service.impl")
 
-import com.gglc.mybatis.service.SpreadServiceImpl;
+import com.climb.mybatis.service.ExtensionServiceImpl;
 import $!{tableInfo.savePackageName}.dao.$!{tableInfo.name}Dao;
 import $!{tableInfo.savePackageName}.entity.$!{tableInfo.name};
 import $!{tableInfo.savePackageName}.service.$!{tableInfo.name}Service;
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 ##表注释（宏定义）
 #tableComment("表服务实现类")
 @Service
-public class $!{tableName} extends SpreadServiceImpl<$!{tableInfo.name}Dao, $!{tableInfo.name}> implements $!{tableInfo.name}Service {
+public class $!{tableName} extends ExtensionServiceImpl<$!{tableInfo.name}Dao, $!{tableInfo.name}> implements $!{tableInfo.name}Service {
 
 }
 ```

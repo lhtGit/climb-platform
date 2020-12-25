@@ -1,4 +1,8 @@
+server:
+  port: 8443
 spring:
+  application:
+    name: ${artifactId}
   cloud:
     gateway:
       routes:
@@ -6,7 +10,6 @@ spring:
           uri: lb://gglc-erp-base
           predicates:
             - Path=/erp/base/**
-
 swagger:
   resources:
     - url: /erp/base/v2/api-docs?group=gglc-erp-base

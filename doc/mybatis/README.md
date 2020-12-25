@@ -7,6 +7,5 @@
 - dao
 - service
 - serviceImpl
-- controller
 - mapper.xml
 

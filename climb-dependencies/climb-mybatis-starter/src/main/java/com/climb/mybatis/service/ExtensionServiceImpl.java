@@ -2,8 +2,7 @@ package com.climb.mybatis.service;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.climb.common.user.UserDetails;
-import com.climb.common.user.UserDetailsService;
+import com.climb.common.user.UserBaseInfo;
 import com.climb.common.user.util.UserUtils;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -13,11 +12,17 @@ import javax.servlet.http.HttpServletRequest;
  * @author lht
  * @since  2020/9/28 11:21
  */
-public class ExtensionServiceImpl<M extends BaseMapper<T>, T> extends ServiceImpl<M , T>  implements UserDetailsService {
+public class ExtensionServiceImpl<M extends BaseMapper<T>, T> extends ServiceImpl<M , T>   {
     @Resource
     protected HttpServletRequest request;
-    @Override
-    public UserDetails getUserDetails() {
+
+    /**
+     * 获取用户信息
+     * @author lht
+     * @since  2020/12/25 13:52
+     * @param
+     */
+    public UserBaseInfo getUserDetails() {
         return UserUtils.getUserDetails(request);
     }
 }
