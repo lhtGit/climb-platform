@@ -4,20 +4,17 @@ seata:
     nacos:
       application: seata-server
       group: DEFAULT_GROUP
-      server-addr: 192.168.8.231:8848
-      namespace: seata
+      server-addr: 192.168.13.3:8848
+      namespace: lhtGit
       cluster: seata-server
       username: nacos
       password: nacos
   config:
     type: nacos
     nacos:
-      server-addr: 192.168.8.231:8848
+      server-addr: 192.168.13.3:8848
       group: SEATA_GROUP
-      namespace: seata
+      namespace: lhtGit
       username: nacos
       password: nacos
-spring:
-  alibaba:
-    seata:
-      tx-service-group: tx_group
+  tx-service-group: tx_group

@@ -30,6 +30,8 @@
         <hutool.version>5.4.1</hutool.version>
         <swagger2.version>2.8.0</swagger2.version>
         <jackson.version>2.11.2</jackson.version>
+        <seata.cloud.version>2.2.0.RELEASE</seata.cloud.version>
+        <seata.version>1.4.1</seata.version>
     </properties>
 
     <dependencyManagement>
@@ -144,7 +146,19 @@
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-seata</artifactId>
-                <version>2.2.0.RELEASE</version>
+                <version>${seata.cloud.version}</version>
+            </dependency>
+            <!-- seata-spring-boot-starter -->
+            <dependency>
+                <groupId>io.seata</groupId>
+                <artifactId>seata-spring-boot-starter</artifactId>
+                <version>${seata.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.seata</groupId>
+                <artifactId>seata-all</artifactId>
+                <version>${seata.version}</version>
             </dependency>
             <!--rabbitmq-->
             <dependency>
@@ -153,6 +167,18 @@
                 <version>2.3.3.RELEASE</version>
             </dependency>
 
+            <!--nacos-->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+                <version>${nacos-version}</version>
+            </dependency>
+            <!--nacos config-->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+                <version>${nacos-version}</version>
+            </dependency>
 
 
             <!--climb-common -->
@@ -248,17 +274,17 @@
                 <!--当前环境-->
                 <profile.name>local</profile.name>
                 <!--Nacos配置中心地址-->
-                <config.server-addr>127.0.0.1:8848</config.server-addr>
+                <config.server-addr>192.168.13.3:8848</config.server-addr>
                 <config.group>DEFAULT_GROUP</config.group>
                 <config.username>nacos</config.username>
                 <config.password>nacos</config.password>
-                <config.namespace>a8b1a504-de2a-4617-adc1-e4f7277d1456</config.namespace>
+                <config.namespace></config.namespace>
                 <!--Nacos服务发现地址-->
-                <discovery.server-addr>127.0.0.1:8848</discovery.server-addr>
+                <discovery.server-addr>192.168.13.3:8848</discovery.server-addr>
                 <discovery.username>nacos</discovery.username>
                 <discovery.password>nacos</discovery.password>
                 <discovery.group>DEFAULT_GROUP</discovery.group>
-                <discovery.namespace>a8b1a504-de2a-4617-adc1-e4f7277d1456</discovery.namespace>
+                <discovery.namespace></discovery.namespace>
             </properties>
         </profile>
 
