@@ -48,6 +48,11 @@ swagger:
 5. 增加Jackson序列化和反序列化处理
 6. 增加全局统一返回类Result和分页PageResult
 
+**6 Seata** 
+ 
+1. 增加seata全局处理异常（com.climb.seata.handler.GlobalSeataExceptionHandler），会根据具体情况来决定是否抛出500异常，并且如果该类
+注册到spring中com.climb.common.handler.GlobalExceptionHandler就不会再注入了
+2. feign启用熔断后会将所有异常全部吃掉，继承这个类（com.climb.seata.feign.fallback.SeataFallbackFactory）后默认如果是seata事务会抛出异常
 
 #### doc说明
 每个yaml文件都可以提出到nacos中做统一管理，里面是每个插件的相关配置及说明
