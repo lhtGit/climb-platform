@@ -3,9 +3,11 @@ package com.climb.redis.feign;
 import com.alibaba.fastjson.JSON;
 import com.climb.common.constant.CommonConstant;
 import com.climb.redis.lock.LockContext;
+import feign.Client;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -20,6 +22,7 @@ import java.util.Set;
  * @since 2020/11/27 11:34
  */
 @Slf4j
+@ConditionalOnClass(Client.class)
 public class FeignRedisLockInterceptor implements RequestInterceptor {
     @Override
     public void apply(RequestTemplate requestTemplate) {

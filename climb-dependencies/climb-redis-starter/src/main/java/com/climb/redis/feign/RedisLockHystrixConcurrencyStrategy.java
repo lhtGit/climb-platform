@@ -3,6 +3,7 @@ package com.climb.redis.feign;
 import com.climb.redis.lock.LockContext;
 import com.netflix.hystrix.strategy.HystrixPlugins;
 import com.netflix.hystrix.strategy.concurrency.HystrixConcurrencyStrategy;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 
@@ -17,6 +18,7 @@ import java.util.concurrent.Callable;
  * @author lht
  * @since  2020/11/27 12:14
  */
+@ConditionalOnClass({HystrixConcurrencyStrategy.class})
 public class RedisLockHystrixConcurrencyStrategy extends HystrixConcurrencyStrategy {
 
 
