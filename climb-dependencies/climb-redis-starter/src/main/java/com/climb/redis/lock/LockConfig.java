@@ -1,8 +1,9 @@
 package com.climb.redis.lock;
 
-import lombok.Getter;
 import org.redisson.Redisson;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
@@ -10,27 +11,13 @@ import javax.annotation.Resource;
  * @author lht
  * @since 2020/12/23 16:29
  */
+@Configuration(proxyBeanMethods = false)
 public class LockConfig {
     @Resource
     private Redisson redisson;
 
-
-    /**
-     * 等待获取锁时间 秒
-     * @author lht
-     * @since  2020/12/23 16:38
-     */
-    @Getter
-    @Value("${customize.lock.wait.time:3}")
-    private long waitTime;
-
-    /**
-     * 保存锁时间 秒
-     * @author lht
-     * @since  2020/12/23 16:38
-     */
-    @Value("${customize.lock.lease.time:20}")
-    private long leaseTime;
+    @Autowired
+    private LockProperties lockProperties;
 
     /**
      * 初始化分布式锁
@@ -40,8 +27,8 @@ public class LockConfig {
      */
     @PostConstruct
     public void initLockUtil(){
-        LockUtil.setLeaseTime(leaseTime);
+        LockUtil.setLeaseTime(lockProperties.getLeaseTime());
         LockUtil.setRedisson(redisson);
-        LockUtil.setWaitTime(waitTime);
+        LockUtil.setWaitTime(lockProperties.getWaitTime());
     }
 }

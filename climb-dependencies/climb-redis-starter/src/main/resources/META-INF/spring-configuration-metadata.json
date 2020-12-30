@@ -1,0 +1,23 @@
+{
+  "properties": [
+    {
+      "name": "redis.lock",
+      "type": "com.climb.redis.lock.LockProperties",
+      "sourceType": "com.climb.redis.lock.LockProperties"
+    },
+    {
+      "name": "redis.lock.wait-time",
+      "type": "java.lang.Long",
+      "description": "等待获取锁时间 秒",
+      "sourceType": "com.climb.redis.lock.LockProperties",
+      "defaultValue": "3"
+    },
+    {
+      "name": "redis.lock.lease-time",
+      "type": "java.lang.Long",
+      "description": "保存锁时间 秒",
+      "sourceType": "com.climb.redis.lock.LockProperties",
+      "defaultValue": "30"
+    }
+  ]
+}

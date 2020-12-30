@@ -4,4 +4,5 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.climb.redis.lock.LockConfig,\
   com.climb.redis.config.RedisLockHttpAutoConfiguration,\
   com.climb.redis.feign.FeignRedisLockInterceptor,\
-  com.climb.redis.feign.RedisLockHystrixConcurrencyStrategy
+  com.climb.redis.feign.RedisLockHystrixConcurrencyStrategy,\
+  com.climb.redis.lock.LockProperties

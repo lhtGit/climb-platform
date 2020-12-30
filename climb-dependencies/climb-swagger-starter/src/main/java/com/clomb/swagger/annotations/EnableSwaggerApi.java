@@ -1,6 +1,7 @@
 package com.clomb.swagger.annotations;
 
 import com.clomb.swagger.config.SwaggerAutoConfigurer;
+import com.clomb.swagger.config.SwaggerProperties;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
@@ -13,6 +14,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE})
 @Documented
-@Import({SwaggerAutoConfigurer.class})
+@Import({SwaggerAutoConfigurer.class, SwaggerProperties.class})
 public @interface EnableSwaggerApi {
 }
