@@ -18,5 +18,6 @@
         <module>climb-redis-starter</module>
         <module>climb-seata-starter</module>
         <module>climb-swagger-starter</module>
+        <module>climb-neo4j-starter</module>
     </modules>
 </project>

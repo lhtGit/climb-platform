@@ -10,28 +10,30 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>climb-swagger-starter</artifactId>
-
+    <artifactId>climb-neo4j-starter</artifactId>
     <dependencies>
+
+        <!--neo4j-jdbc-driver-->
         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
+            <groupId>org.neo4j</groupId>
+            <artifactId>neo4j-jdbc-driver</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <!-- druid -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.github.xiaoymin</groupId>
-            <artifactId>knife4j-spring-ui</artifactId>
+            <groupId>com.climb</groupId>
+            <artifactId>climb-mybatis-starter</artifactId>
+            <scope>compile</scope>
         </dependency>
-        <!--context-->
+
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-context</artifactId>
-            <scope>provided</scope>
-            <optional>true</optional>
-        </dependency>
-         <!--spring boot-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
             <scope>provided</scope>
             <optional>true</optional>
         </dependency>
