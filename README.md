@@ -5,12 +5,12 @@
 # 简介
 致力于搭建一个能够满足大多数情况下的业务框架
 
-###  climb-feign-starter
+##  climb-feign-starter
 > 引入spring-cloud-starter-openfeign
 - Hystrix并发策略处理request传播
 - 通过request向下传递在线用户信息
 
-###  climb-mybatis-starter
+##  climb-mybatis-starter
 > 引入mybatis-plus
 - 将common中的雪花算法注入mybatis中(com.climb.mybatis.config.CusIdentifierGenerator)
 - com.climb.mybatis.service.ExtensionServiceImpl扩展ServiceImpl.class，增加了本项目获取在线用户信息功能
@@ -19,7 +19,7 @@
 
 **注:** 在项目的doc中有mybatis反序列化的插件内容
 
-###  climb-redis-starter
+##  climb-redis-starter
 > 引入redis和redission
 - 增加分布式锁com.climb.redis.lock.LockUtil，并强化分布式锁能够通过feign传播(com.climb.redis.feign)，
 在通过feign调用其他服务时，可以实现其他微服务的重入锁，
@@ -34,7 +34,7 @@ redis:
     wait-time: 3
 ```
 
-### climb-swagger-starter
+## climb-swagger-starter
 > 引入swagger2和knife4j-spring-ui
 - 增加@EnableSwaggerProvider开启集成各个模块的swagger文档,一般用于gateway使用
 - 增加@EnableSwaggerApi开启swagger
@@ -56,7 +56,7 @@ swagger:
       email: xxx@qq.com
       url: http://ip:port
 ```
-### climb-common-starter
+## climb-common-starter
 
 - 增加一些常用工具类,位于com.climb.common.util
 - 增加用户信息及获取方法com.climb.common.user
@@ -65,13 +65,13 @@ swagger:
 - 增加Jackson序列化和反序列化处理
 - 增加全局统一返回类Result和分页PageResult
 
-### climb-seata-starter
+## climb-seata-starter
  
 - 增加seata全局处理异常（com.climb.seata.handler.GlobalSeataExceptionHandler），会根据具体情况来决定是否抛出500异常，并且如果该类
 注册到spring中com.climb.common.handler.GlobalExceptionHandler就不会再注入了
 - feign启用熔断后会将所有异常全部吃掉，继承这个类（com.climb.seata.feign.fallback.SeataFallbackFactory）后默认如果是seata事务会抛出异常
 
-### climb-gateway
+## climb-gateway
 - 实现网关相关功能
 - 处理所有异常，包括路由异常或者Gateway异常
 - 实现登录功能，使用jwt作为token，accessToken过期后需要通过refreshToken获取新的token信息，
@@ -87,7 +87,7 @@ jwt:
   refresh-expiration: 8640000000
   secret: 1234567asdfghjk
 ```
-###  climb-neo4j-starter
+##  climb-neo4j-starter
 - 整合Neo4j+mybatis-plus并实现分页功能
 - neo4j默认不支持BigDecimal的处理
 
@@ -111,5 +111,5 @@ neo4j:
     localtionPattern: classpath*:mapper/*.xml
 ```
 
-### doc说明
+## doc说明
 每个yaml文件都可以提出到nacos中做统一管理，里面是每个插件的相关配置及说明
