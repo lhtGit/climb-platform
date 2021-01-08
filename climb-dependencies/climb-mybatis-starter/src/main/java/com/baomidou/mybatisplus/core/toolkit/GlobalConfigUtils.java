@@ -23,6 +23,7 @@ import com.baomidou.mybatisplus.core.injector.ISqlInjector;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
 import com.climb.mybatis.config.CusIdentifierGenerator;
+import com.climb.mybatis.injector.EnhancejSqlInjector;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSessionFactory;
 
@@ -33,7 +34,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Mybatis全局缓存工具类
- *
+ * 修改 获取默认 MybatisGlobalConfig {@link #defaults} 方法，注入自定义唯一id生成器和增强sql注入器
  * @author Caratacus
  * @since 2017-06-15
  */
@@ -61,6 +62,7 @@ public class GlobalConfigUtils {
     public static GlobalConfig defaults() {
         GlobalConfig  config = new GlobalConfig().setDbConfig(new GlobalConfig.DbConfig());
         config.setIdentifierGenerator(new CusIdentifierGenerator());
+        config.setSqlInjector(new EnhancejSqlInjector());
         return config;
     }
 
