@@ -1,7 +1,11 @@
 package com.climb.mybatis.page.interceptor;
 
 import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.core.metadata.OrderItem;
+import static com.baomidou.mybatisplus.core.toolkit.StringPool.SPACE;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
+
+import java.util.List;
 
 /**
  * 扩展分页拦截器
@@ -25,5 +29,24 @@ public class ExtensionPaginationInnerInterceptor extends PaginationInnerIntercep
         }
         return super.autoCountSql(optimizeCountSql, sql);
     }
+
+    @Override
+    protected String concatOrderBy(String originalSql, List<OrderItem> orderList) {
+        //对neo4j数据库 做特殊处理
+        if (dbType == DbType.NEO4J) {
+            StringBuilder orderSql = new StringBuilder(" order by ");
+            orderList.forEach(orderItem -> {
+                orderSql.append(SPACE)
+                        .append(orderItem.getColumn())
+                        .append(SPACE)
+                        .append(orderItem.isAsc()?"asc":"desc")
+                        .append(SPACE);
+            });
+
+            return originalSql+orderSql.toString();
+        }
+        return super.concatOrderBy(originalSql, orderList);
+    }
+
 
 }
