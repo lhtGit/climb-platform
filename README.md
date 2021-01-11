@@ -15,7 +15,7 @@
 - 将common中的雪花算法注入mybatis中(com.climb.mybatis.config.CusIdentifierGenerator)
 - com.climb.mybatis.service.ExtensionServiceImpl扩展ServiceImpl.class，增加了本项目获取在线用户信息功能
 - com.climb.mybatis.config.MyMetaObjectHandler设置一下默认操作MyMetaObjectHandler，暂未开启
-- 增加了新的方言Neo4j，目前仅能处理分页，ServiceImpl中的方法目前对于neo4j来说还不能使用
+- 增加了新的方言Neo4j，目前能够处理分页和增删改功能，neo4j数据库dao需要继承com.climb.mybatis.injector.neo4j.Neo4jMapper类实现基本功能的注入，其他类型数据库没有变化
 
 **注:** 在项目的doc中有mybatis反序列化的插件内容
 
