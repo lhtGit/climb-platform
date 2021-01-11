@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.injector.AbstractMethod;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.core.toolkit.sql.SqlScriptUtils;
 import com.climb.mybatis.injector.neo4j.Neo4jSqlMethod;
+import com.climb.mybatis.injector.neo4j.Utils;
 import org.apache.ibatis.executor.keygen.NoKeyGenerator;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlCommandType;
@@ -19,12 +20,14 @@ public class Neo4jDelete extends AbstractMethod {
     public MappedStatement injectMappedStatement(Class<?> mapperClass, Class<?> modelClass, TableInfo tableInfo) {
         Neo4jSqlMethod neo4jSqlMethod = Neo4jSqlMethod.DELETE;
         //拼接sql 脚本 where条件部分
-        StringBuilder sqlWhereScriptBuffer = new StringBuilder();
+        StringBuilder sqlWhereScriptBuffer = new StringBuilder(Utils.generateKeySqlOfColon(tableInfo));
+
+
         tableInfo.getFieldList().forEach(tableFieldInfo -> {
             String attributes = tableFieldInfo.getColumn();
             sqlWhereScriptBuffer.append(
-                    SqlScriptUtils.convertIf(attributes + COLON + SqlScriptUtils.safeParam("param."+attributes)+COMMA
-                            , "param."+attributes + "!=null "
+                    SqlScriptUtils.convertIf(attributes + COLON + SqlScriptUtils.safeParam(attributes)+COMMA
+                            , attributes + "!=null "
                             , true)
             )
                     .append(NEWLINE);

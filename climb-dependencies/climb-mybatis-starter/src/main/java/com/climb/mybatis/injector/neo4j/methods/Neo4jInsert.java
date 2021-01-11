@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.sql.SqlScriptUtils;
 import com.climb.mybatis.injector.neo4j.Neo4jSqlMethod;
+import com.climb.mybatis.injector.neo4j.Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.executor.keygen.KeyGenerator;
 import org.apache.ibatis.executor.keygen.NoKeyGenerator;
@@ -33,7 +34,7 @@ public class Neo4jInsert extends AbstractMethod {
         String keyProperty = null;
         String keyColumn = null;
         // 表包含主键处理逻辑,如果不包含主键当普通字段处理
-        if (StringUtils.isNotBlank(tableInfo.getKeyProperty())) {
+        if (tableInfo.havePK()) {
             //如果IdType为AUTO ，则警告不会做任何操作 等价于没有设置主键
             if (tableInfo.getIdType() == IdType.AUTO) {
                 log.warn(modelClass.getName() + "的主键生成类型不能为AUTO，neo4j不支持该生成规则！");
@@ -46,7 +47,7 @@ public class Neo4jInsert extends AbstractMethod {
             }
         }
         //拼接sql 脚本 参数部分
-        StringBuilder sqlParamsScriptBuffer = new StringBuilder();
+        StringBuilder sqlParamsScriptBuffer = new StringBuilder(Utils.generateKeySqlOfColon(tableInfo));
         tableInfo.getFieldList().forEach(tableFieldInfo -> {
             String attributes = tableFieldInfo.getColumn();
             sqlParamsScriptBuffer.append(

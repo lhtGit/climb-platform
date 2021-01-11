@@ -43,7 +43,7 @@ public interface Neo4jMapper<T> extends Mapper<T> {
      * @since  2021/1/8 18:01
      * @param param
      */
-    int delete(@Param("param") T param);
+    int delete( T param);
 
     /**
      * 删除 根据id
@@ -52,5 +52,7 @@ public interface Neo4jMapper<T> extends Mapper<T> {
      * @param id
      */
     int deleteById(@Param(StringConstant.KEY_ID) Serializable id);
+
+
 }
 

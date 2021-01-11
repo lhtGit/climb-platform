@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.injector.AbstractMethod;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.core.toolkit.sql.SqlScriptUtils;
 import com.climb.mybatis.injector.neo4j.Neo4jSqlMethod;
+import com.climb.mybatis.injector.neo4j.Utils;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlSource;
 
@@ -16,7 +17,7 @@ public class Neo4jUpdate extends AbstractMethod {
     public MappedStatement injectMappedStatement(Class<?> mapperClass, Class<?> modelClass, TableInfo tableInfo) {
         Neo4jSqlMethod neo4jSqlMethod = Neo4jSqlMethod.UPDATE;
         //拼接sql 脚本 where条件部分
-        StringBuilder sqlWhereScriptBuffer = new StringBuilder();
+        StringBuilder sqlWhereScriptBuffer = new StringBuilder(Utils.generateKeySqlOfColon(tableInfo,"param"));
         tableInfo.getFieldList().forEach(tableFieldInfo -> {
             String attributes = tableFieldInfo.getColumn();
             sqlWhereScriptBuffer.append(

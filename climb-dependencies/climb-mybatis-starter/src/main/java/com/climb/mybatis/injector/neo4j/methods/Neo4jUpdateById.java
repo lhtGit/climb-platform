@@ -23,7 +23,7 @@ public class Neo4jUpdateById extends AbstractMethod {
         StringBuilder sqlWhereScriptBuffer = new StringBuilder();
         //设置id
         String keyId = tableInfo.getKeyColumn();
-        if(StringUtils.isEmpty(keyId)){
+        if(!tableInfo.havePK()){
             log.warn(mapperClass+"因为没有指定id，所以不能使用"+neo4jSqlMethod.getMethodName()+"方法，如果要使用请使用@TableId指定");
             return null;
         }
