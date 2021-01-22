@@ -30,7 +30,20 @@
             <artifactId>climb-mybatis-starter</artifactId>
             <scope>compile</scope>
         </dependency>
-
+        <!--SEATA-->
+        <dependency>
+            <groupId>com.climb</groupId>
+            <artifactId>climb-seata-starter</artifactId>
+            <scope>provided</scope>
+            <optional>true</optional>
+        </dependency>
+        <!--common-->
+        <dependency>
+            <groupId>com.climb</groupId>
+            <artifactId>climb-common-starter</artifactId>
+            <scope>provided</scope>
+            <optional>true</optional>
+        </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-context</artifactId>

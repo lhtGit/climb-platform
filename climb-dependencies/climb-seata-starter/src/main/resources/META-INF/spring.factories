@@ -1,4 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.climb.seata.handler.GlobalSeataExceptionHandler,\
-  com.climb.seata.config.DataSourceConfiguration
+  com.climb.seata.handler.GlobalSeataExceptionHandler
 

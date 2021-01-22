@@ -18,3 +18,7 @@ seata:
       username: nacos
       password: nacos
   tx-service-group: tx_group
+  # 关闭spring-seata-starter的dataSourceProxy自动注入，开启com.climb.seata.config.DataSourceConfiguration中的dataSourceProxy自动注入
+  # DataSourceConfiguration中和spring-seata-starter的dataSourceProxy自动注入几乎一样，不过已经排除了neo4j数据库的，防止报错
+  # 推荐使用false
+  enable-auto-data-source-proxy: false

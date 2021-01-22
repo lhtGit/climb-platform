@@ -1,11 +1,13 @@
 package com.climb.neo4j.config;
 
-import com.alibaba.druid.pool.DruidDataSource;
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import com.climb.mybatis.page.interceptor.ExtensionPaginationInnerInterceptor;
+import com.climb.neo4j.constant.Neo4jConstant;
 import com.climb.neo4j.properties.Neo4jDataSourceProperties;
+import com.climb.seata.lcn.annotation.LcnAnnotation;
+import com.climb.seata.lcn.datasource.LcnDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
@@ -42,9 +44,10 @@ public class Neo4jMybatisMappingConfig {
     @javax.annotation.Resource
     private Neo4jDataSourceProperties dataSourceProperties;
 
-    @Bean("neo4jDatasource")
+    @Bean(Neo4jConstant.NEO4J_DATASOURCE_NAME)
+    @LcnAnnotation
     public DataSource getDataSource() throws Exception{
-        DruidDataSource datasource = new DruidDataSource();
+        LcnDataSource datasource = new LcnDataSource();
         datasource.setUrl(dataSourceProperties.getUrl());
         datasource.setUsername(dataSourceProperties.getUsername());
         datasource.setPassword(dataSourceProperties.getPassword());
@@ -72,7 +75,7 @@ public class Neo4jMybatisMappingConfig {
 
 
     @Bean("neo4SqlSessionFactory")
-    public SqlSessionFactory neo4SqlSessionFactory(@Qualifier("neo4jDatasource") DataSource dataSource) throws Exception {
+    public SqlSessionFactory neo4SqlSessionFactory(@Qualifier(Neo4jConstant.NEO4J_DATASOURCE_NAME) DataSource dataSource) throws Exception {
         MybatisSqlSessionFactoryBean fb = new MybatisSqlSessionFactoryBean();
         fb.setDataSource(dataSource);
         //配饰插件 分页、
