@@ -1,3 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.climb.neo4j.properties.Neo4jDataSourceProperties,\
-  com.climb.neo4j.config.Neo4jMybatisMappingConfig
+  com.climb.neo4j.config.Neo4jMybatisMappingConfig,\
+  com.climb.neo4j.config.ChainedTransactionManagerConfig

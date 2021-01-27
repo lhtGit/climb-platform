@@ -34,7 +34,7 @@ import java.util.List;
  * @author wang.liang
  */
 /*
- * 添加去除NEO4J_DATASOURCE_NAME 的datasource的代理 ——》 63 line
+ * 添加
  * @author lht
  * @since  2021/1/20 10:21
  */
@@ -59,18 +59,10 @@ public class SeataDataSourceBeanPostProcessor implements BeanPostProcessor {
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
 
         if (bean instanceof DataSource) {
-            //Use lcn model datasource
-            if(DataSourceLcnHolder.get().isLcn((DataSource) bean) &&!excludes.contains(bean.getClass().getName())){
-//                DataSourceLcnHolder.get().putDataSource(((DataSource)bean),dataSourceProxyMode);
-            //When not in the excludes, put and init proxy.
-            }else if(!excludes.contains(bean.getClass().getName())){
-                try{
-                    //Only put and init proxy, not return proxy.
-                    DataSourceProxyHolder.get().putDataSource((DataSource) bean, dataSourceProxyMode);
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-
+            //判断是否为lcn数据源，如果是则不创建DataSourceProxy
+            if(!DataSourceLcnHolder.get().isLcn((DataSource) bean)&&!excludes.contains(bean.getClass().getName())){
+                //Only put and init proxy, not return proxy.
+                DataSourceProxyHolder.get().putDataSource((DataSource) bean, dataSourceProxyMode);
             }
 
             //If is SeataDataSourceProxy, return the original data source.

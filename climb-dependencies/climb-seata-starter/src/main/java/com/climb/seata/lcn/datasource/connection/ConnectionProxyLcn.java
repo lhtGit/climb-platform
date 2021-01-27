@@ -1,6 +1,11 @@
 package com.climb.seata.lcn.datasource.connection;
 
+import com.climb.seata.lcn.datasource.DataSourceProxyLcn;
+import com.climb.seata.lcn.exception.SeataException;
 import io.seata.core.context.RootContext;
+import io.seata.core.model.BranchType;
+import io.seata.rm.DefaultResourceManager;
+import io.seata.rm.datasource.ConnectionProxy;
 import lombok.extern.slf4j.Slf4j;
 
 import java.sql.*;
@@ -9,6 +14,10 @@ import java.util.Properties;
 import java.util.concurrent.Executor;
 
 /**
+ * 代理lcn connection，
+ * 并将commit、rollback、close方法置为空方法，
+ * 添加notify来具体执行commit和rollback
+ * 部分方法copy自{@link  io.seata.rm.datasource.AbstractConnectionProxy}用来验证是否开启seata事务
  * @author lht
  * @since 2021/1/21 16:42
  */
@@ -19,8 +28,17 @@ public class ConnectionProxyLcn implements Connection {
      */
     protected Connection targetConnection;
 
-    public ConnectionProxyLcn(Connection targetConnection) {
+    private DataSourceProxyLcn dataSourceProxyLcn;
+
+    private final static ConnectionProxy.LockRetryPolicy LOCK_RETRY_POLICY = new ConnectionProxy.LockRetryPolicy();
+
+    public ConnectionProxyLcn(Connection targetConnection, DataSourceProxyLcn dataSourceProxyLcn) {
         this.targetConnection = targetConnection;
+        this.dataSourceProxyLcn = dataSourceProxyLcn;
+    }
+
+    public DataSourceProxyLcn getDataSourceProxyLcn() {
+        return dataSourceProxyLcn;
     }
 
     public Connection getTargetConnection() {
@@ -44,11 +62,12 @@ public class ConnectionProxyLcn implements Connection {
             try{
                 targetConnection.close();
             }catch (Exception e){
-                log.error("连接关闭失败",e);
+                log.error("LCN连接关闭失败",e);
             }
 
         }
     }
+
     @Override
     public Statement createStatement() throws SQLException {
         return getTargetConnection().createStatement();
@@ -82,10 +101,22 @@ public class ConnectionProxyLcn implements Connection {
 
     @Override
     public void commit() throws SQLException {
+        try{
+            LOCK_RETRY_POLICY.execute(() -> {
+                DefaultResourceManager.get().branchRegister(BranchType.AT, getDataSourceProxyLcn().getResourceId(),
+                        null, RootContext.getXID(), null, null);
+                return null;
+            });
+        }catch (Exception e){
+            throw new SeataException(e);
+        }
+
+
     }
 
     @Override
     public void rollback() throws SQLException {
+        targetConnection.rollback();
     }
 
     @Override

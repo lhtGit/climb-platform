@@ -70,6 +70,10 @@ swagger:
 - 增加seata全局处理异常（com.climb.seata.handler.GlobalSeataExceptionHandler），会根据具体情况来决定是否抛出500异常，并且如果该类
 注册到spring中com.climb.common.handler.GlobalExceptionHandler就不会再注入了
 - feign启用熔断后会将所有异常全部吃掉，继承这个类（com.climb.seata.feign.fallback.SeataFallbackFactory）后默认如果是seata事务会抛出异常
+- seata加入lcn模式，当前lcn模式集成在AT模式上，不需要别的配置，当想使用lcn模式时需要使用com.climb.seata.lcn.datasource.LcnDataSource数据源就可以了，
+LcnDataSource数据源继承与DruidDataSource
+注入方式与DruidDataSource完全一样，目前只是用来区分数据源使用使用lcn模式
+使用lcn模式与使用AT模式代码完全一样，待使框架会将lcn的connetion挂起，直到seata通知全局的事务commit/rollback
 
 ## climb-gateway
 - 实现网关相关功能
@@ -90,11 +94,17 @@ jwt:
 ##  climb-neo4j-starter
 - 整合Neo4j+mybatis-plus并实现分页功能
 - neo4j默认不支持BigDecimal的处理
+- 整合climb-seata-starter到neo4j，使seata分布式事务支持neo4j，声明数据源要使用LcnDataSource数据源，开启LCN模式
 
-**待扩展：**  目前并不能使用mybatis-plus的一些常用方法，例如：save、findAll等，以后有时间写
 
-注：如果引入了Neo4j-starter，那么在原有项目的上的数据源注册需要改一下，因为是多个数据源了需要和 com.climb.neo4j.config.Neo4jMybatisMappingConfig一样，
+**注：**
+1. 如果引入了Neo4j-starter，那么在原有项目的上的数据源注册需要改一下，因为是多个数据源了需要和 com.climb.neo4j.config.Neo4jMybatisMappingConfig一样，
 最后要注意在注入分页时选择了DBType是Neo4j，其他的数据库也要选对应的
+2. 设置neo4j.enable-open-local-transaction=true 开启neo4j本地事务，并注册链式事务管理器，该管理器会将会有事务管理器全部注册进去，如果开启本地事务，
+因为多数据源的原因，需要将其他dataSource的事务管理器显式的声明，就像ChainedTransactionManagerConfig#neo4jTransactionManager一样，因为开启后已经声明了事务管理器
+，springboot就不会再自动注入事务管理器了,如果选择不开启本地事务，那么neo4j将无法使用@Transactional进行统一管理，但是可以使用climb-seata-starter的 @GlobalTransactional
+来保证事务
+
 
 **相关配置**（neo4j.datasource.*还有配置druid的配置，一般使用默认配置就可以了）
 

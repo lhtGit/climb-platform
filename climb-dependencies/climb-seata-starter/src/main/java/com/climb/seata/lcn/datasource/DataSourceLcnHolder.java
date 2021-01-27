@@ -4,17 +4,20 @@ import com.climb.common.util.IdUtils;
 import io.seata.common.util.CollectionUtils;
 import io.seata.core.model.BranchType;
 import io.seata.rm.datasource.SeataDataSourceProxy;
+import io.seata.spring.annotation.datasource.DataSourceProxyHolder;
 
 import javax.sql.DataSource;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
+ * lcn代理数据源持有者
+ * copy自{@link DataSourceProxyHolder}，预期作用一致，都是用来持有代理数据源与源数据源之间关系的
  * @author lht
  * @since 2021/1/21 17:00
  */
 public class DataSourceLcnHolder {
     private static final int MAP_INITIAL_CAPACITY = 8;
-    private ConcurrentHashMap<DataSource, DataSourceProxyLcn> dataSourceProxyMap;
+    private final ConcurrentHashMap<DataSource, DataSourceProxyLcn> dataSourceProxyMap;
 
     private DataSourceLcnHolder() {
         dataSourceProxyMap = new ConcurrentHashMap<>(MAP_INITIAL_CAPACITY);

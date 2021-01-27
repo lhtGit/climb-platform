@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import com.climb.mybatis.page.interceptor.ExtensionPaginationInnerInterceptor;
 import com.climb.neo4j.constant.Neo4jConstant;
 import com.climb.neo4j.properties.Neo4jDataSourceProperties;
-import com.climb.seata.lcn.annotation.LcnAnnotation;
 import com.climb.seata.lcn.datasource.LcnDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -19,6 +18,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -45,7 +46,6 @@ public class Neo4jMybatisMappingConfig {
     private Neo4jDataSourceProperties dataSourceProperties;
 
     @Bean(Neo4jConstant.NEO4J_DATASOURCE_NAME)
-    @LcnAnnotation
     public DataSource getDataSource() throws Exception{
         LcnDataSource datasource = new LcnDataSource();
         datasource.setUrl(dataSourceProperties.getUrl());
@@ -74,7 +74,7 @@ public class Neo4jMybatisMappingConfig {
     }
 
 
-    @Bean("neo4SqlSessionFactory")
+    @Bean
     public SqlSessionFactory neo4SqlSessionFactory(@Qualifier(Neo4jConstant.NEO4J_DATASOURCE_NAME) DataSource dataSource) throws Exception {
         MybatisSqlSessionFactoryBean fb = new MybatisSqlSessionFactoryBean();
         fb.setDataSource(dataSource);
@@ -86,7 +86,7 @@ public class Neo4jMybatisMappingConfig {
         return fb.getObject();
     }
 
-    @Bean(name = "neo4jSqlSessionTemplate")
+    @Bean
     public SqlSessionTemplate neo4jSqlSessionTemplate(@Qualifier("neo4SqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
         return new SqlSessionTemplate(sqlSessionFactory);
     }

@@ -65,11 +65,14 @@ public class SeataAutoDataSourceProxyAdvice implements MethodInterceptor, Introd
         DataSource dataSource = (DataSource) invocation.getThis();
         SeataDataSourceProxy dataSourceProxy;
         Method m;
+        //判断是否为lcn模式
         if(DataSourceLcnHolder.get().isLcn(dataSource)){
             m = BeanUtils.findDeclaredMethod(DataSourceProxyLcn.class, method.getName(), method.getParameterTypes());
+            //生成lcn模式数据源代理
             dataSourceProxy = DataSourceLcnHolder.get().putDataSource(dataSource,dataSourceProxyMode);
         }else{
             m = BeanUtils.findDeclaredMethod(dataSourceProxyClazz, method.getName(), method.getParameterTypes());
+            //生成AT模式数据源代理
             dataSourceProxy = DataSourceProxyHolder.get().putDataSource(dataSource, dataSourceProxyMode);
         }
 

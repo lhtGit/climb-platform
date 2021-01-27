@@ -36,6 +36,11 @@ import static io.seata.common.DefaultValues.DEFAULT_TM_ROLLBACK_RETRY_COUNT;
  *
  * @author sharajava
  */
+/**
+ * 在commit和rollback加入 ContextHolder.get().notify 通知lcn操作数据库
+ * @author lht
+ * @since  2021/1/25 9:10
+ */
 public class DefaultGlobalTransaction implements GlobalTransaction {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DefaultGlobalTransaction.class);

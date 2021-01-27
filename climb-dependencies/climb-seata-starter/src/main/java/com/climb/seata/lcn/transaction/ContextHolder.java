@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
+ * 持有与seata关联的事务id的lcn连接代理信息
  * @author lht
  * @since 2021/1/22 11:22
  */
@@ -63,6 +64,9 @@ public class ContextHolder {
         ConcurrentHashMap<String,ConnectionProxyLcn> connectionMap = contextMap.get(xid);
         if(connectionMap==null){
             return ;
+        }
+        if (log.isInfoEnabled()) {
+            log.info("SEATA LCN notify: " + xid + " " + isCommit);
         }
         for (ConnectionProxyLcn connectionProxyLcn : connectionMap.values()) {
             connectionProxyLcn.notify(isCommit);
