@@ -1,4 +1,4 @@
-package com.clomb.swagger.config;
+package com.climb.swagger.config;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;

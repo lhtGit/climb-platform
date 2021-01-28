@@ -1,4 +1,4 @@
-package com.clomb.swagger.provider;
+package com.climb.swagger.provider;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

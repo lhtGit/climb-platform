@@ -1,4 +1,4 @@
-package com.clomb.swagger.annotations;
+package com.climb.swagger.annotations;
 
 
 import io.swagger.annotations.ApiModelProperty;

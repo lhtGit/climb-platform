@@ -17,7 +17,8 @@ package com.baomidou.mybatisplus.extension.plugins.pagination;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
-import com.clomb.swagger.annotations.IgnoreSwaggerParameter;
+import com.climb.common.bean.PageDefinition;
+import com.climb.swagger.annotations.IgnoreSwaggerParameter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -36,7 +37,7 @@ import java.util.function.Predicate;
  * @since 2018-06-09
  */
 @ApiModel("简单分页模型")
-public class Page<T> implements IPage<T> {
+public class Page<T> implements IPage<T>, PageDefinition<T> {
     @IgnoreSwaggerParameter
     private static final long serialVersionUID = 8545996863226528798L;
 

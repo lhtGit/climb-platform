@@ -1,7 +1,7 @@
-package com.clomb.swagger.annotations;
+package com.climb.swagger.annotations;
 
-import com.clomb.swagger.config.SwaggerAutoConfigurer;
-import com.clomb.swagger.config.SwaggerProperties;
+import com.climb.swagger.config.SwaggerAutoConfigurer;
+import com.climb.swagger.config.SwaggerProperties;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;

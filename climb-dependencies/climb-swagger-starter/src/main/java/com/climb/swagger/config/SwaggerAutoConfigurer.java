@@ -1,4 +1,4 @@
-package com.clomb.swagger.config;
+package com.climb.swagger.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.util.StringUtils;

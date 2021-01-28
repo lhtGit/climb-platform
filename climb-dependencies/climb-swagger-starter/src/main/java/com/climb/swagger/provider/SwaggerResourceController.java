@@ -1,4 +1,4 @@
-package com.clomb.swagger.provider;
+package com.climb.swagger.provider;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

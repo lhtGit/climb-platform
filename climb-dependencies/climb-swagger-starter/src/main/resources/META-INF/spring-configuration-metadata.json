@@ -2,41 +2,41 @@
   "properties": [
     {
       "name": "swagger.doc",
-      "type": "com.clomb.swagger.config.SwaggerProperties",
-      "sourceType": "com.clomb.swagger.config.SwaggerProperties"
+      "type": "com.climb.swagger.config.SwaggerProperties",
+      "sourceType": "com.climb.swagger.config.SwaggerProperties"
     },
     {
       "name": "swagger.doc.name",
       "type": "java.lang.String",
       "description": "name",
-      "sourceType": "com.clomb.swagger.config.SwaggerProperties"
+      "sourceType": "com.climb.swagger.config.SwaggerProperties"
     },
     {
       "name": "swagger.doc.title",
       "type": "java.lang.String",
       "description": "title",
-      "sourceType": "com.clomb.swagger.config.SwaggerProperties",
+      "sourceType": "com.climb.swagger.config.SwaggerProperties",
       "defaultValue": "管理Api"
     },
     {
       "name": "swagger.doc.description",
       "type": "java.lang.String",
       "description": "描述",
-      "sourceType": "com.clomb.swagger.config.SwaggerProperties",
+      "sourceType": "com.climb.swagger.config.SwaggerProperties",
       "defaultValue": "管理"
     },
     {
       "name": "swagger.doc.version",
       "type": "java.lang.String",
       "description": "版本",
-      "sourceType": "com.clomb.swagger.config.SwaggerProperties",
+      "sourceType": "com.climb.swagger.config.SwaggerProperties",
       "defaultValue": "v1.0"
     },
     {
       "name": "swagger.doc.basePackage",
       "type": "java.lang.String",
       "description": "swagger扫描基础包",
-      "sourceType": "com.clomb.swagger.config.SwaggerProperties"
+      "sourceType": "com.climb.swagger.config.SwaggerProperties"
     },
     {
       "name": "swagger.doc.contact",

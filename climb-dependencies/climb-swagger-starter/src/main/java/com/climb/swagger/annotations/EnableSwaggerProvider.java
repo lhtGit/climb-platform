@@ -1,8 +1,8 @@
-package com.clomb.swagger.annotations;
+package com.climb.swagger.annotations;
 
-import com.clomb.swagger.provider.SwaggerProperties;
-import com.clomb.swagger.provider.SwaggerProvider;
-import com.clomb.swagger.provider.SwaggerResourceController;
+import com.climb.swagger.provider.SwaggerProperties;
+import com.climb.swagger.provider.SwaggerProvider;
+import com.climb.swagger.provider.SwaggerResourceController;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
