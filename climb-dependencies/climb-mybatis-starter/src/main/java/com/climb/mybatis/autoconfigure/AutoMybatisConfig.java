@@ -9,12 +9,14 @@ import com.climb.mybatis.page.interceptor.ExtensionPaginationInnerInterceptor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * mybatis自动装配
  * @author lht
  * @since 2021/1/29 10:11
  */
+@Configuration
 public class AutoMybatisConfig {
 
     /**
@@ -57,6 +59,7 @@ public class AutoMybatisConfig {
             name = {"auto-injection","autoInjection"},
             havingValue = "true"
     )
+    @Configuration
     static class InjectionMetaObjectHandlerConfig{
         @Bean
         public InjectionMetaObjectHandler injectionMetaObjectHandler(){
