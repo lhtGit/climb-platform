@@ -24,7 +24,7 @@
         <spring-boot.version>2.3.3.RELEASE</spring-boot.version>
         <nacos-version>2.2.1.RELEASE</nacos-version>
         <openfeign-version>2.2.5.RELEASE</openfeign-version>
-        <mybatis-plus-version>3.4.0</mybatis-plus-version>
+        <mybatis-plus-version>3.4.2</mybatis-plus-version>
         <mysql-versin>6.0.6</mysql-versin>
         <druid.version>1.1.23</druid.version>
         <hutool.version>5.4.1</hutool.version>

@@ -1,4 +1,4 @@
-package com.clomb.feign.hystrix;
+package com.climb.feign.hystrix;
 
 /**
  * 校验熔断中是否抛出异常

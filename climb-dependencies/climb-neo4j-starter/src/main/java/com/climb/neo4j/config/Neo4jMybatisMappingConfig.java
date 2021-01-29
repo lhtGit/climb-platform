@@ -1,6 +1,7 @@
 package com.climb.neo4j.config;
 
 import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.autoconfigure.ConfigurationCustomizer;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import com.climb.mybatis.page.interceptor.ExtensionPaginationInnerInterceptor;
@@ -100,4 +101,11 @@ public class Neo4jMybatisMappingConfig {
         interceptor.addInnerInterceptor(new ExtensionPaginationInnerInterceptor(DbType.NEO4J));
         return interceptor;
     }
+
+
+    @Bean
+    public ConfigurationCustomizer configurationCustomizer() {
+        return configuration -> configuration.setUseDeprecatedExecutor(false);
+    }
+
 }

@@ -12,8 +12,15 @@ import java.util.stream.Collectors;
  * @Date  2020/9/14 12:09
  */
 public class Pageable {
+    private static final  int PAGE = 1;
+    private static final  int SIZE = 10;
+
+    public static <T> Page<T> empty(){
+        return new Page<T>();
+    }
+
     public static <T> Page<T> page(){
-        return new Page<>();
+        return page(PAGE,SIZE);
     }
 
     public static <T> Page<T> page(long page,long size){

@@ -1,4 +1,4 @@
-package com.clomb.feign.hystrix;
+package com.climb.feign.hystrix;
 
 import com.climb.common.exception.GlobalException;
 import com.netflix.hystrix.exception.HystrixTimeoutException;

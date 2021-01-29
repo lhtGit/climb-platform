@@ -1,4 +1,4 @@
-package com.clomb.feign;
+package com.climb.feign;
 
 import com.climb.common.constant.CommonConstant;
 import feign.RequestInterceptor;

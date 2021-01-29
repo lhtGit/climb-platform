@@ -1,4 +1,4 @@
-package com.clomb.feign;
+package com.climb.feign;
 
 import feign.RequestInterceptor;
 import org.springframework.context.annotation.Bean;

@@ -1,0 +1,11 @@
+{
+  "properties": [
+    {
+      "name": "mybatis.auto-injection",
+      "type": "java.lang.Boolean",
+      "description": "等待获取锁时间 秒",
+      "sourceType": "com.climb.mybatis.autoconfigure.AutoMybatisConfig$InjectionMetaObjectHandlerConfig",
+      "defaultValue": "false"
+    }
+  ]
+}

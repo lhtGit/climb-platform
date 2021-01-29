@@ -1,4 +1,4 @@
-package com.clomb.feign;
+package com.climb.feign;
 
 import com.netflix.hystrix.strategy.HystrixPlugins;
 import com.netflix.hystrix.strategy.concurrency.HystrixConcurrencyStrategy;

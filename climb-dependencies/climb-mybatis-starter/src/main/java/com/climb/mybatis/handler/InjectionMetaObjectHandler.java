@@ -1,4 +1,4 @@
-package com.climb.mybatis.config;
+package com.climb.mybatis.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.climb.common.user.util.UserUtils;
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
  * @since  2020/12/23 17:25
  */
 @Slf4j
-public class MyMetaObjectHandler implements MetaObjectHandler {
+public class InjectionMetaObjectHandler implements MetaObjectHandler {
 
 	@Resource
 	protected HttpServletRequest request;

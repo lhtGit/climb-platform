@@ -1,4 +1,4 @@
-package com.climb.mybatis.config;
+package com.climb.mybatis.toolkit;
 
 import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
 import com.climb.common.util.IdUtils;

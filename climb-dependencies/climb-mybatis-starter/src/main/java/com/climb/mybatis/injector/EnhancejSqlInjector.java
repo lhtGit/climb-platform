@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.injector.AbstractSqlInjector;
 import com.baomidou.mybatisplus.core.injector.methods.*;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.mapper.Mapper;
+import com.climb.mybatis.injector.expansion.methods.ShareSelectList;
 import com.climb.mybatis.injector.neo4j.Neo4jMapper;
 import com.climb.mybatis.injector.neo4j.methods.*;
 
@@ -54,7 +55,8 @@ public class EnhancejSqlInjector extends AbstractSqlInjector {
                 new SelectMapsPage(),
                 new SelectObjs(),
                 new SelectList(),
-                new SelectPage()
+                new SelectPage(),
+                new ShareSelectList()
         ).collect(toList()));
         //添加基于Neo4jMapper的注入器
         CACHE_SQL_INJECTOR.put(Neo4jMapper.class,Stream.of(

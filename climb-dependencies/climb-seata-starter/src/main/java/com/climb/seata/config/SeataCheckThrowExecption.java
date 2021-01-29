@@ -1,6 +1,6 @@
 package com.climb.seata.config;
 
-import com.clomb.feign.hystrix.CheckThrowExecption;
+import com.climb.feign.hystrix.CheckThrowExecption;
 import io.seata.core.context.RootContext;
 
 /**
