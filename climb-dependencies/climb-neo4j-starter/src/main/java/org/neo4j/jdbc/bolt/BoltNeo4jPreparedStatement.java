@@ -111,7 +111,22 @@ public class BoltNeo4jPreparedStatement extends Neo4jPreparedStatement implement
             return result;
         } catch (Exception var6) {
             throw new BatchUpdateException(result, var6);
+        }finally {
+            //清除 批量提交数据
+            clearBatch();
         }
+    }
+
+    public void close() throws SQLException {
+        if (!this.isClosed()) {
+            if (this.currentResultSet != null && !this.currentResultSet.isClosed()) {
+                this.currentResultSet.close();
+            }
+
+            this.currentUpdateCount = -1;
+            this.connection = null;
+        }
+
     }
 
 

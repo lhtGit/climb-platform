@@ -35,6 +35,12 @@ public class FeignBasicRequestInterceptor implements RequestInterceptor {
      * @param request
      */
     private void setUserInfo(RequestTemplate requestTemplate,HttpServletRequest request){
+        //设置任命用户信息
+        String userStr = (String)request.getAttribute(CommonConstant.APPOINT_USER_INFO);
+        if(userStr!=null){
+            requestTemplate.header(CommonConstant.APPOINT_USER_INFO, userStr);
+        }
+        //设置登录用户信息
         String loginUserStr = request.getHeader(CommonConstant.USER_INFO);
         if(loginUserStr!=null){
             requestTemplate.header(CommonConstant.USER_INFO, loginUserStr);

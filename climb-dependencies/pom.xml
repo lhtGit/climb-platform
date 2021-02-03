@@ -19,5 +19,6 @@
         <module>climb-seata-starter</module>
         <module>climb-swagger-starter</module>
         <module>climb-neo4j-starter</module>
+        <module>climb-lcn-starter</module>
     </modules>
 </project>

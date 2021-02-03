@@ -9,7 +9,7 @@
 > 引入spring-cloud-starter-openfeign
 - Hystrix并发策略处理request传播
 - 通过request向下传递在线用户信息
-
+- FeignUtils：增加设置登录用户工具类，设置用户后会覆盖登录用户信息
 ##  climb-mybatis-starter
 > 引入mybatis-plus
 - 将common中的雪花算法注入mybatis中(CusIdentifierGenerator)
@@ -78,6 +78,10 @@ LcnDataSource数据源继承与DruidDataSource
 注入方式与DruidDataSource完全一样，目前只是用来区分数据源使用使用lcn模式
 使用lcn模式与使用AT模式代码完全一样，待使框架会将lcn的connetion挂起，直到seata通知全局的事务commit/rollback
 
+#### 变更
+- 2021-02-02
+1. LcnDataSource位置变更为climb-lcn-starter中
+
 ## climb-gateway
 - 实现网关相关功能
 - 处理所有异常，包括路由异常或者Gateway异常
@@ -99,6 +103,9 @@ jwt:
 - neo4j默认不支持BigDecimal的处理
 - 整合climb-seata-starter到neo4j，使seata分布式事务支持neo4j，声明数据源要使用LcnDataSource数据源，开启LCN模式
 
+#### 变更
+- 2021-02-02
+1. saveBatch方法重复提交问题：解决BoltNeo4jPreparedStatement在mybatis批量提交数据时没有清除batchParameters导致的重复提交数据问题，目前mybatis-puls的saveBatch已经可以正常使用
 
 **注：**
 1. 如果引入了Neo4j-starter，那么在原有项目的上的数据源注册需要改一下，因为是多个数据源了需要和 Neo4jMybatisMappingConfig一样，
@@ -123,6 +130,10 @@ neo4j:
     basePackages: com.example.neo4jdemo.dao
     localtionPattern: classpath*:mapper/*.xml
 ```
+## climb-lcn-starter
+- 2021-02-03
+1. 该模块只有只用于seata使用lcn模式时的指定datasource，
+之所以提出来是因为想让climb-neo4j-starter能够直接使用LcnDataSource并且能够不适用seata，其他模块要使用seata的lcn模式时也可以引用该包
 
 ## doc说明
 每个yaml文件都可以提出到nacos中做统一管理，里面是每个插件的相关配置及说明

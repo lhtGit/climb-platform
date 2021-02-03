@@ -234,6 +234,12 @@
                 <artifactId>climb-neo4j-starter</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
+            <!--climb lcn-->
+            <dependency>
+                <groupId>com.climb</groupId>
+                <artifactId>climb-lcn-starter</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

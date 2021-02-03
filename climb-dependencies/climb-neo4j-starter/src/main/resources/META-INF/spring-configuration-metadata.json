@@ -159,6 +159,13 @@
       "sourceType": "com.climb.neo4j.config.ChainedTransactionManagerConfig",
       "description": "开启neo4j本地事务，并注册链式事务管理器，该管理器会将会有事务管理器全部注册进去",
       "defaultValue": false
+    },
+    {
+      "name": "neo4j.config.enable",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.climb.neo4j.config.Neo4jMybatisMappingConfig",
+      "description": "开启neo4j本地事务，并注册链式事务管理器，该管理器会将会有事务管理器全部注册进去",
+      "defaultValue": true
     }
   ]
 }

@@ -32,6 +32,11 @@
 
         <dependency>
             <groupId>com.climb</groupId>
+            <artifactId>climb-lcn-starter</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.climb</groupId>
             <artifactId>climb-common-starter</artifactId>
             <scope>provided</scope>
             <optional>true</optional>
