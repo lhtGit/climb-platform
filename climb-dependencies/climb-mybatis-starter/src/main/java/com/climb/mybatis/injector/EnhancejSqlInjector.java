@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.core.mapper.Mapper;
 import com.climb.mybatis.injector.expansion.methods.ShareSelectList;
 import com.climb.mybatis.injector.neo4j.Neo4jMapper;
 import com.climb.mybatis.injector.neo4j.methods.*;
+import com.climb.mybatis.injector.neo4j.relationship.RelationshipMapper;
+import com.climb.mybatis.injector.neo4j.relationship.methods.RelationshipInsert;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -65,6 +67,10 @@ public class EnhancejSqlInjector extends AbstractSqlInjector {
                 new Neo4jUpdateById(),
                 new Neo4jDelete(),
                 new Neo4jDeleteById()
+        ).collect(toList()));
+        //关系 基于 RelationshipMapper的注入器
+        CACHE_SQL_INJECTOR.put(RelationshipMapper.class,Stream.of(
+                new RelationshipInsert()
         ).collect(toList()));
     }
 
