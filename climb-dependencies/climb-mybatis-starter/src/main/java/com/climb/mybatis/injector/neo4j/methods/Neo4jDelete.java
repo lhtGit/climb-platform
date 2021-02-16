@@ -24,9 +24,10 @@ public class Neo4jDelete extends AbstractMethod {
 
 
         tableInfo.getFieldList().forEach(tableFieldInfo -> {
-            String attributes = tableFieldInfo.getColumn();
+            String column = tableFieldInfo.getColumn();
+            String attributes = tableFieldInfo.getProperty();
             sqlWhereScriptBuffer.append(
-                    SqlScriptUtils.convertIf(attributes + COLON + SqlScriptUtils.safeParam(attributes)+COMMA
+                    SqlScriptUtils.convertIf(column + COLON + SqlScriptUtils.safeParam(attributes)+COMMA
                             , attributes + "!=null "
                             , true)
             )

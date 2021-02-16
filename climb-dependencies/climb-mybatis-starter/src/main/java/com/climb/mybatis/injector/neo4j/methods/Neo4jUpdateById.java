@@ -38,9 +38,10 @@ public class Neo4jUpdateById extends AbstractMethod {
         //拼接sql 脚本 set value 部分
         StringBuilder sqlValueScriptBuffer = new StringBuilder();
         tableInfo.getFieldList().forEach(tableFieldInfo -> {
-            String attributes = tableFieldInfo.getColumn();
+            String column = tableFieldInfo.getColumn();
+            String attributes = tableFieldInfo.getProperty();
             sqlValueScriptBuffer.append(
-                    SqlScriptUtils.convertIf("n."+attributes + EQUALS + SqlScriptUtils.safeParam("val."+attributes)+COMMA
+                    SqlScriptUtils.convertIf("n."+column + EQUALS + SqlScriptUtils.safeParam("val."+attributes)+COMMA
                             , "val."+attributes + "!=null "
                             , true)
             ).append(NEWLINE);

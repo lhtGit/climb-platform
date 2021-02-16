@@ -19,9 +19,10 @@ public class Neo4jUpdate extends AbstractMethod {
         //拼接sql 脚本 where条件部分
         StringBuilder sqlWhereScriptBuffer = new StringBuilder(Utils.generateKeySqlOfColon(tableInfo,"param"));
         tableInfo.getFieldList().forEach(tableFieldInfo -> {
-            String attributes = tableFieldInfo.getColumn();
+            String column = tableFieldInfo.getColumn();
+            String attributes = tableFieldInfo.getProperty();
             sqlWhereScriptBuffer.append(
-                    SqlScriptUtils.convertIf(attributes + COLON + SqlScriptUtils.safeParam("param."+attributes)+COMMA
+                    SqlScriptUtils.convertIf(column + COLON + SqlScriptUtils.safeParam("param."+attributes)+COMMA
                             , "param."+attributes + "!=null "
                             , true)
             )
@@ -31,9 +32,10 @@ public class Neo4jUpdate extends AbstractMethod {
         //拼接sql 脚本 set value 部分
         StringBuilder sqlValueScriptBuffer = new StringBuilder();
         tableInfo.getFieldList().forEach(tableFieldInfo -> {
-            String attributes = tableFieldInfo.getColumn();
+            String column = tableFieldInfo.getColumn();
+            String attributes = tableFieldInfo.getProperty();
             sqlValueScriptBuffer.append(
-                    SqlScriptUtils.convertIf("n."+attributes + EQUALS + SqlScriptUtils.safeParam("val."+attributes)+COMMA
+                    SqlScriptUtils.convertIf("n."+column + EQUALS + SqlScriptUtils.safeParam("val."+attributes)+COMMA
                             , "val."+attributes + "!=null "
                             , true)
             )

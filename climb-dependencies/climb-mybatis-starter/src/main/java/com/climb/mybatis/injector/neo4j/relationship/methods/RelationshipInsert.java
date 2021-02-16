@@ -33,9 +33,10 @@ public class RelationshipInsert extends AbstractMethod {
         tableInfo.getFieldList().stream()
                 .filter(tableFieldInfo -> !Utils.isRelationshipPkId(tableFieldInfo.getColumn()))
                 .forEach(tableFieldInfo -> {
-                    String attributes = tableFieldInfo.getColumn();
+                    String column = tableFieldInfo.getColumn();
+                    String attributes = tableFieldInfo.getProperty();
                     sqlParamsScriptBuffer.append(
-                            SqlScriptUtils.convertIf(attributes + COLON + SqlScriptUtils.safeParam("param."+attributes)+COMMA
+                            SqlScriptUtils.convertIf(column + COLON + SqlScriptUtils.safeParam("param."+attributes)+COMMA
                                     , "param."+attributes + "!=null "
                                     , true)
                     )

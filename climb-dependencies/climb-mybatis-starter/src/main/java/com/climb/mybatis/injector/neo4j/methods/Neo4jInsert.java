@@ -49,9 +49,10 @@ public class Neo4jInsert extends AbstractMethod {
         //拼接sql 脚本 参数部分
         StringBuilder sqlParamsScriptBuffer = new StringBuilder(Utils.generateKeySqlOfColon(tableInfo));
         tableInfo.getFieldList().forEach(tableFieldInfo -> {
-            String attributes = tableFieldInfo.getColumn();
+            String column = tableFieldInfo.getColumn();
+            String attributes = tableFieldInfo.getProperty();
             sqlParamsScriptBuffer.append(
-                    SqlScriptUtils.convertIf(attributes + COLON + SqlScriptUtils.safeParam(attributes)+COMMA
+                    SqlScriptUtils.convertIf(column + COLON + SqlScriptUtils.safeParam(attributes)+COMMA
                             , attributes + "!=null "
                             , true)
             )
