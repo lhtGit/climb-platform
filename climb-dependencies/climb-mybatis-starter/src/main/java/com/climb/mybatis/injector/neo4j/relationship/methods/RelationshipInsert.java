@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.core.toolkit.sql.SqlScriptUtils;
 import com.climb.mybatis.injector.neo4j.Utils;
 import com.climb.mybatis.injector.neo4j.relationship.RelationshipSqlMethod;
+import com.climb.mybatis.injector.neo4j.relationship.bean.RelTableInfo;
+import com.climb.mybatis.injector.neo4j.relationship.bean.RelationshipInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.executor.keygen.KeyGenerator;
 import org.apache.ibatis.executor.keygen.NoKeyGenerator;
@@ -29,9 +31,15 @@ public class RelationshipInsert extends AbstractMethod {
         String keyColumn = null;
 
         //拼接sql 脚本 参数部分
-        StringBuilder sqlParamsScriptBuffer = new StringBuilder(Utils.generateKeySqlOfColon(tableInfo));
+        StringBuilder sqlParamsScriptBuffer = new StringBuilder(Utils.generateKeySqlOfColon(tableInfo,"param"));
+        //解析relationship table
+        RelationshipInfo relationshipInfo = Utils.parseRelationshipTableInfo(modelClass);
+        if(!relationshipInfo.isSuccess()){
+            log.warn("{} relationship modelClass parse exception",modelClass.getName());
+            return null;
+        }
         tableInfo.getFieldList().stream()
-                .filter(tableFieldInfo -> !Utils.isRelationshipPkId(tableFieldInfo.getColumn()))
+                .filter(tableFieldInfo -> !relationshipInfo.getRelationshipFields().contains(tableFieldInfo.getProperty()))
                 .forEach(tableFieldInfo -> {
                     String column = tableFieldInfo.getColumn();
                     String attributes = tableFieldInfo.getProperty();
@@ -46,7 +54,12 @@ public class RelationshipInsert extends AbstractMethod {
 
         String sqlParamsScript = SqlScriptUtils.convertTrim(sqlParamsScriptBuffer.toString(), LEFT_BRACE, RIGHT_BRACE, null, COMMA);
         //格式化sql
-        String sql = String.format(relationshipSqlMethod.getSql(), tableInfo.getTableName(), sqlParamsScript);
+        RelTableInfo formTableInfo = relationshipInfo.getFormTableInfo();
+        RelTableInfo toTableInfo = relationshipInfo.getToTableInfo();
+        String sql = String.format(relationshipSqlMethod.getSql(),
+                formTableInfo.getTableName(),formTableInfo.getAttributeName(),formTableInfo.getProperty(),
+                toTableInfo.getTableName(),toTableInfo.getAttributeName(),toTableInfo.getProperty(),
+                tableInfo.getTableName(), sqlParamsScript);
 
         SqlSource sqlSource = languageDriver.createSqlSource(configuration, sql, modelClass);
         return this.addInsertMappedStatement(mapperClass, modelClass, relationshipSqlMethod.getMethodName(), sqlSource, keyGenerator, keyProperty, keyColumn);

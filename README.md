@@ -16,7 +16,13 @@
 - ExtensionServiceImpl扩展ServiceImpl.class，增加了本项目获取在线用户信息功能
 - InjectionMetaObjectHandler能够自动在新增和修改时自动注入参数，默认关闭
 - 增加了新的方言Neo4j，目前能够处理分页和增删改功能，neo4j数据库dao需要继承Neo4jMapper类实现基本功能的注入，其他类型数据库没有变化
-- neo4j新增创建关联关系（自动注入（RelationshipMapper））
+
+- 2021-2-22
+
+    neo4j新增创建关联关系（自动注入（RelationshipMapper））
+使用@FormRelationship和@ToRelationship指定关系的起点和终点节点信息。
+目前不支持指定类，只能指定列如String这种基本类型，没有加入相关的service，以后有需求在加上这两个
+
 **注:** 在项目的doc中有mybatis反序列化的插件内容
 ```yaml
 mybatis:
@@ -137,3 +143,7 @@ neo4j:
 
 ## doc说明
 每个yaml文件都可以提出到nacos中做统一管理，里面是每个插件的相关配置及说明
+
+## demo说明
+1. neo4j和mybatis相关的demo都在climb-neo4j-demo中，基本都在controller
+2. 与gateway关联和一些其他demo都在climb-test-user中

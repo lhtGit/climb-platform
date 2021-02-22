@@ -3,6 +3,8 @@ package com.climb.mybatis.service;
 import com.baomidou.mybatisplus.core.toolkit.ReflectionKit;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
+import com.climb.common.user.bean.UserInfoBase;
+import com.climb.common.user.util.UserUtils;
 import com.climb.mybatis.injector.neo4j.Neo4jMapper;
 import com.climb.mybatis.injector.neo4j.Neo4jSqlMethod;
 import org.apache.ibatis.logging.Log;
@@ -11,6 +13,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
 import java.util.function.BiConsumer;
 
@@ -29,6 +33,8 @@ public class Neo4jServiceImpl<M extends Neo4jMapper<T>, T> {
     @Autowired
     protected M baseMapper;
 
+    @Resource
+    protected HttpServletRequest request;
     public M getBaseMapper() {
         return baseMapper;
     }
@@ -46,6 +52,16 @@ public class Neo4jServiceImpl<M extends Neo4jMapper<T>, T> {
     }
 
 
+
+    /**
+     * 获取用户信息
+     * @author lht
+     * @since  2020/12/25 13:52
+     * @param
+     */
+    public UserInfoBase getUserDetails() {
+        return UserUtils.getUserDetails(request);
+    }
     /**
      * 批量插入
      *
