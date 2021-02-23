@@ -367,13 +367,19 @@ public class BoltNeo4jResultSet extends Neo4jResultSet {
     public BigDecimal getBigDecimal(int columnIndex) throws SQLException {
         this.checkClosed();
         Value value = this.fetchValueFromIndex(columnIndex);
-        return new BigDecimal(value.asString());
+        if(value instanceof StringValue){
+            return new BigDecimal(value.asString());
+        }
+        return new BigDecimal(value.toString());
     }
 
     public BigDecimal getBigDecimal(String columnLabel) throws SQLException {
         this.checkClosed();
         Value value = this.fetchValueFromLabel(columnLabel);
-        return new BigDecimal(value.asString());
+        if(value instanceof StringValue){
+            return new BigDecimal(value.asString());
+        }
+        return new BigDecimal(value.toString());
     }
 
     public Neo4jArray getArray(int columnIndex) throws SQLException {

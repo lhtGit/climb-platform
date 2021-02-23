@@ -31,7 +31,7 @@ public class RelationshipInsert extends AbstractMethod {
         String keyColumn = null;
 
         //拼接sql 脚本 参数部分
-        StringBuilder sqlParamsScriptBuffer = new StringBuilder(Utils.generateKeySqlOfColon(tableInfo,"param"));
+        StringBuilder sqlParamsScriptBuffer = new StringBuilder(Utils.generateKeySqlOfColon(tableInfo));
         //解析relationship table
         RelationshipInfo relationshipInfo = Utils.parseRelationshipTableInfo(modelClass);
         if(!relationshipInfo.isSuccess()){
@@ -44,12 +44,12 @@ public class RelationshipInsert extends AbstractMethod {
                     String column = tableFieldInfo.getColumn();
                     String attributes = tableFieldInfo.getProperty();
                     sqlParamsScriptBuffer.append(
-                            SqlScriptUtils.convertIf(column + COLON + SqlScriptUtils.safeParam("param."+attributes)+COMMA
-                                    , "param."+attributes + "!=null "
+                            SqlScriptUtils.convertIf(column + COLON + SqlScriptUtils.safeParam(attributes)+COMMA
+                                    , attributes + "!=null "
                                     , true)
                     )
-                    .append(NEWLINE);
-        });
+                            .append(NEWLINE);
+                });
 
 
         String sqlParamsScript = SqlScriptUtils.convertTrim(sqlParamsScriptBuffer.toString(), LEFT_BRACE, RIGHT_BRACE, null, COMMA);

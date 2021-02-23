@@ -9,7 +9,7 @@ import lombok.Getter;
  */
 @Getter
 public enum RelationshipSqlMethod {
-    INSERT("insert","<script>\n match(a:%s {%s:#{param.%s}}) match(b:%s {%s:#{param.%s}}) create (a)-[r:%s %s]->(b)  \n</script>"),
+    INSERT("insert","<script>\n match(a:%s {%s:#{%s}}) match(b:%s {%s:#{%s}}) create (a)-[r:%s %s]->(b)  \n</script>"),
     ;
     private final String methodName;
     private final String sql;

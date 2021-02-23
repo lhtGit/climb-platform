@@ -23,6 +23,10 @@
 使用@FormRelationship和@ToRelationship指定关系的起点和终点节点信息。
 目前不支持指定类，只能指定列如String这种基本类型，没有加入相关的service，以后有需求在加上这两个
 
+- 2021-2-23
+    
+    对neo4j的relationship增加ServiceUtil，能够批量处理新增请求
+
 **注:** 在项目的doc中有mybatis反序列化的插件内容
 ```yaml
 mybatis:
