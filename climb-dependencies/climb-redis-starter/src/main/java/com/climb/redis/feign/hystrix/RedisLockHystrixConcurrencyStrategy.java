@@ -1,4 +1,4 @@
-package com.climb.redis.feign;
+package com.climb.redis.feign.hystrix;
 
 import com.climb.redis.lock.LockContext;
 import com.netflix.hystrix.strategy.HystrixPlugins;

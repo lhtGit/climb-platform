@@ -7,6 +7,7 @@ import feign.Client;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -24,6 +25,10 @@ import java.util.Set;
 @Slf4j
 @ConditionalOnClass(Client.class)
 public class FeignRedisLockInterceptor implements RequestInterceptor {
+
+    @Autowired(required = false)
+    private CleanLockRemnant cleanLockRemnant;
+
     @Override
     public void apply(RequestTemplate requestTemplate) {
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
@@ -52,7 +57,9 @@ public class FeignRedisLockInterceptor implements RequestInterceptor {
             log.error("设置 分布式锁 Context:",e);
         }finally {
             //清除context
-            LockContext.removeAll();
+            if(cleanLockRemnant!=null){
+                cleanLockRemnant.clean();
+            }
         }
     }
 

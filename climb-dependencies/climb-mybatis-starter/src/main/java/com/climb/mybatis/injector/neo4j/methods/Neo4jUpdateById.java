@@ -31,7 +31,7 @@ public class Neo4jUpdateById extends AbstractMethod {
         sqlWhereScriptBuffer.append(LEFT_BRACE)
                 .append(keyId)
                 .append(COLON)
-                .append(SqlScriptUtils.safeParam(StringConstant.KEY_ID))
+                .append(SqlScriptUtils.safeParam(tableInfo.getKeyProperty()))
                 .append(NEWLINE)
                 .append(RIGHT_BRACE);
 
@@ -41,8 +41,8 @@ public class Neo4jUpdateById extends AbstractMethod {
             String column = tableFieldInfo.getColumn();
             String attributes = tableFieldInfo.getProperty();
             sqlValueScriptBuffer.append(
-                    SqlScriptUtils.convertIf("n."+column + EQUALS + SqlScriptUtils.safeParam("val."+attributes)+COMMA
-                            , "val."+attributes + "!=null "
+                    SqlScriptUtils.convertIf("n."+column + EQUALS + SqlScriptUtils.safeParam(attributes)+COMMA
+                            , attributes + "!=null "
                             , true)
             ).append(NEWLINE);
         });

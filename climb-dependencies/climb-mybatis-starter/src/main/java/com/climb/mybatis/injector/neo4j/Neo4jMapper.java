@@ -33,10 +33,9 @@ public interface Neo4jMapper<T> extends Mapper<T> {
      * 修改 根据id
      * @author lht
      * @since  2021/1/8 18:31
-     * @param id
      * @param val
      */
-    int updateById(@Param(StringConstant.KEY_ID) Serializable id, @Param("val") T val);
+    int updateById( T val);
     /**
      * 删除节点及节点相关联的边
      * @author lht
