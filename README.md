@@ -77,6 +77,39 @@ swagger:
 - 增加全局异常父级类GlobalException
 - 增加Jackson序列化和反序列化处理
 - 增加全局统一返回类Result和分页PageResult
+- 2021-3-1增加全局日志
+
+    使用log4j配置，文件在common的resource下
+    
+    使用时添加pom：
+    ```xml
+     <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+        <exclusions>
+            <exclusion>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-logging</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-log4j2</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-aop</artifactId>
+    </dependency>
+    
+    ```
+    并在yml中添加
+    ```yaml
+    logging:
+      config: classpath:log4j.xml
+    ```
+    当前默认的切面路径为 execution(* com.climb.\*.controller..\*(..))
+
 
 ## climb-seata-starter
  
@@ -92,7 +125,13 @@ LcnDataSource数据源继承与DruidDataSource
 逗号表示一个字段，分号表示一个验证集合，任何一个集合通过就算是通过
 #### 变更
 - 2021-02-02
-1. LcnDataSource位置变更为climb-lcn-starter中
+
+    LcnDataSource位置变更为climb-lcn-starter中
+- 2021-3-1 增加自定义数据验证
+
+    增加自定义数据验证 判断数据回滚前是否变更，seata.data.validate.fields
+    数据结构是：字段1,字段2;字段3
+    逗号表示一个字段，分号表示一个验证集合，任何一个集合通过就算是通过
 
 ## climb-gateway
 - 实现网关相关功能
