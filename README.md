@@ -89,7 +89,7 @@ LcnDataSource数据源继承与DruidDataSource
 使用lcn模式与使用AT模式代码完全一样，待使框架会将lcn的connetion挂起，直到seata通知全局的事务commit/rollback
 - 增加自定义数据验证 判断数据回滚前是否变更，seata.data.validate.fields
 数据结构是：字段1,字段2;字段3
-逗号表示一个字段验证集合，分号表示任何一个集合通过就算是通过
+逗号表示一个字段，分号表示一个验证集合，任何一个集合通过就算是通过
 #### 变更
 - 2021-02-02
 1. LcnDataSource位置变更为climb-lcn-starter中
