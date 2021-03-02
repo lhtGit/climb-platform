@@ -78,38 +78,42 @@ swagger:
 - 增加Jackson序列化和反序列化处理
 - 增加全局统一返回类Result和分页PageResult
 - 2021-3-1增加全局日志
-
-    使用log4j配置，文件在common的resource下
+    - 开启日志在启动类添加@EnableLog 开启请求日志记录
     
-    使用时添加pom：
-    ```xml
-     <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-web</artifactId>
-        <exclusions>
-            <exclusion>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-logging</artifactId>
-            </exclusion>
-        </exclusions>
-    </dependency>
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-log4j2</artifactId>
-    </dependency>
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-aop</artifactId>
-    </dependency>
+    - 开启log4j日志记录
+        
+        使用log4j配置，文件在common的resource下
+        
+        使用时添加pom：
+        ```xml
+         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        
+        ```
+        并在yml中添加
+        ```yaml
+        logging:
+          config: classpath:log4j.xml
+        ```
+        当前默认的切面路径为 execution(* com.climb.\*.controller..\*(..))
+        
     
-    ```
-    并在yml中添加
-    ```yaml
-    logging:
-      config: classpath:log4j.xml
-    ```
-    当前默认的切面路径为 execution(* com.climb.\*.controller..\*(..))
-
 
 ## climb-seata-starter
  
